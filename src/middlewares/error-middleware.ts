@@ -19,7 +19,6 @@ export default function errorHandlingMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  console.log(error);
 
   const { name, message } = error;
   const status = errorStatusMap[name] || httpStatus.INTERNAL_SERVER_ERROR;
