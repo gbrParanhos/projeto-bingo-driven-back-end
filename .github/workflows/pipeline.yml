@@ -5,18 +5,18 @@ on:
       - main
 jobs:
   CI-ContinuousIntegration:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-    - name: Make a new .env file
-      uses: SpicyPizza/create-env-file@v2.0.3
-      with:
-        envkey_POSTGRES_USER: ${{ secrets.TEST_POSTGRES_USER }}
-        envkey_POSTGRES_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}
-        envkey_POSTGRES_DB: ${{ secrets.TEST_POSTGRES_DB }}
-        envkey_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
-        directory: .
-        filename: .env.test
-    - name: Run tests
-      run: docker compose -f docker-compose-test.yml run backend npm run test:ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Make a new .env file
+        uses: SpicyPizza/create-env-file@v2.0.3
+        with:
+          envkey_POSTGRES_USER: ${{ secrets.TEST_POSTGRES_USER }}
+          envkey_POSTGRES_PASSWORD: ${{ secrets.TEST_POSTGRES_PASSWORD }}
+          envkey_POSTGRES_DB: ${{ secrets.TEST_POSTGRES_DB }}
+          envkey_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+          directory: .
+          filename: .env.test
+      - name: Run tests
+        run: docker compose -f docker-compose-test.yml run backend npm run test:ci
